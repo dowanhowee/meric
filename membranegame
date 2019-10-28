@@ -1,0 +1,75 @@
+import random
+a = '*'*30
+b = 'myGame'
+print(a+b+a)
+healthbar = 3
+joker = 0
+olasilik = (1/6)*100
+olasilik2 = ((1/6)*(1/6)) * 100
+print("2 zar aynanda atılıyor, atılan zarlardan bir tanesini bilirseniz 1 can ve 1 joker hakkı kazanırsınız.")
+print("2 zarı da bilirseniz 1 joker ve 2 can kazanırsınız.")
+print("Jokeriniz olmasına rağmen kazanırsanız jokeriniz erir ve tekrar joker hakkı alamazsınız.")
+print("Joker hakkınızla bilemediğiniz zaman canınız korunur.")
+print("En fazla 1 joker hakkınız olabilir.")
+print(f"Atılan zarlardan en az birini bilme olasılığın: %{olasilik}, ikisini de bilme olasılığın: %{olasilik2}")
+print("Canınız bittiğinde oyun otomatik kapanır.")
+print("Seçiminizi yazdıktan sonra enter tuşuna basın.")
+username = input("Kullanıcı adı: ")
+print(f"Hoşgeldin {username}.")
+while healthbar >= 1:
+    print(a+b+a)
+    dizi = []
+    rakamlar = [1,2,3,4,5,6]
+    random.shuffle(rakamlar)
+    for i in range(0,2):
+        zar = random.choice(rakamlar)
+        dizi.append(zar)
+    secim = int(input("İlk seçiminiz: "))
+    secim2 = int(input("İkinci seçiminiz: "))
+    if (secim in dizi) and (secim2 in dizi) and (joker == 0):
+        print("Şanslısın! 2 sayıyı da bilerek 1 joker hakkı ve 2 can kazandın.")
+        joker = joker + 1
+        healthbar = healthbar + 2
+        print(f"Mevcut canın: {healthbar}, mevcut joker hakkın: {joker}")
+        print(f"Zarlar şunlardı: {dizi}")
+    elif ((secim in dizi) and (secim2 in dizi)) and (joker == 1):
+        print("Şanslısın! 2 sayıyı da bilerek 2 can kazandın ve joker hakkın korundu.")
+        joker = joker
+        healthbar = healthbar + 2
+        print(f"Mevcut canın: {healthbar}, mevcut joker hakkın: {joker}")
+        print(f"Zarlar şunlardı: {dizi}")
+    elif ((secim in dizi) or (secim2 in dizi)) and (joker == 1):
+        print("Şanslısın! 1 sayıyı bilerek 1 can kazandın ve joker hakkın korundu.")
+        joker = joker
+        healthbar = healthbar + 1
+        print(f"Mevcut canın: {healthbar}, mevcut joker hakkın: {joker}")
+        print(f"Zarlar şunlardı: {dizi}")
+    elif ((secim in dizi) or (secim2 in dizi)) and (joker == 0):
+        print("Şanslısın! 1 sayı bilerek 1 joker hakkı kazandın.")
+        joker = joker + 1
+        healthbar = healthbar + 1
+        print(f"Mevcut canın: {healthbar}, mevcut joker hakkın: {joker}")
+        print(f"Zarlar şunlardı: {dizi}")
+    elif ((secim not in dizi) and (secim2 not in dizi)) and (joker == 1):
+        print("Şanssızlık! Bilemedin ancak joker hakkın sayesinde kurtuldun.")
+        joker = joker - 1
+        healthbar = healthbar
+        print(f"Mevcut canın: {healthbar}, mevcut joker hakkın: {joker}")
+        print(f"Zarlar şunlardı: {dizi}")
+    elif ((secim not in dizi) and (secim2 not in dizi)) and joker == 0:
+        print("Şanssızlık! Bilemedin ve joker hakkın yoktu, 1 can kaybettin.")
+        healthbar = healthbar - 1
+        joker = joker
+        print(f"Mevcut canın: {healthbar}, mevcut joker hakkın: {joker}")
+        print(f"Zarlar şunlardı: {dizi}")
+        if healthbar == 0:
+            print(a+b+a)
+            print(f"Seninle oynamak zevkti {username}")
+        else:
+            continue
+    continue
+a = input("Çıkmak için herhangi bir tuşa basınız.")
+if a == q:
+    quit
+else:
+    quit
